@@ -91,45 +91,13 @@ export class AccountPage {
     await expect(this.confirmPasswordInput).toBeVisible();
     await expect(this.createAccountButton).toBeVisible();
     await expect(this.switchToCreateAccountButton).toBeVisible();
+    await expect(this.passwordRules).toBeVisible();
+    await expect(this.tooltipContainer).toBeVisible();
     await expect(this.termsOfUseText).toBeVisible();
     await expect(this.termsOfUseLink).toBeVisible();
-  }
-
-  async getTooltipText(triggerLocator: Locator): Promise<string | null> {
-    const host = this.page.locator('ngp-text-field.email-field mat-label ngp-tooltip');
-    const overlay = this.page.locator('.cdk-overlay-container');
-
-  await this.hoverBrutal(host, this.page);
-  await overlay.waitFor({ state: 'visible' });
-  return (await overlay.textContent())?.trim() ?? '';
   }
 
   async getPasswordRules(): Promise<string | null> {
     return this.passwordRules.textContent();
   }
-
-  async hoverBrutal(loc: import('@playwright/test').Locator, page: import('@playwright/test').Page) {
-    await loc.scrollIntoViewIfNeeded();
-  
-   
-    try { await loc.hover({ position: { x: 6, y: 6 } }); await page.waitForTimeout(120); } catch {}
-  
-   
-    const box = await loc.boundingBox();
-    if (box) {
-      await page.mouse.move(box.x + 2, box.y + 2);
-      await page.mouse.move(box.x + Math.min(10, box.width - 2), box.y + Math.min(10, box.height - 2));
-      await page.waitForTimeout(120);
-    }
-  
-  
-    try {
-      await loc.dispatchEvent('pointerover');
-      await loc.dispatchEvent('pointerenter');
-      await loc.dispatchEvent('mouseover');
-      await loc.dispatchEvent('mouseenter');
-      await page.waitForTimeout(120);
-    } catch {}
-  }
-
 }
