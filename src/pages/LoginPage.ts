@@ -13,10 +13,10 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.loginTitle = page.locator('h1:has-text("Welcome back")');
-    this.emailInput = page.locator('input[data-placeholder="Enter email"]');
-    this.passwordInput = page.locator('input[data-placeholder="Enter password"][type="password"]');
-    this.loginButton = page.locator('button:has-text("Log in")');
+    this.loginTitle = page.getByRole('heading', { level: 1, name: /Welcome back/i });
+    this.emailInput = page.getByPlaceholder('Enter email');
+    this.passwordInput = page.getByPlaceholder('Enter password').and(page.locator('input[type="password"]'));
+    this.loginButton = page.getByRole('button', { name: /Log in/i });
     this.errorMessage = page.locator('.nw-text-left.ngp-info-block-content');
     this.hintEmail = page.locator('.email-field .mat-error');
     this.hintPassword = page.locator('.auth-password-field .mat-error');
@@ -24,9 +24,9 @@ export class LoginPage {
 
   
   async openFromHome() {
-    await this.page.goto('https://paydo.com/');
-    await this.page.locator('a.cards-main-baner__button:has-text("Open account")').click();
-    await this.page.locator('span:has-text("Log In")').click();
+    await this.page.goto('/');
+    await this.page.getByRole('link', { name: /Open account/i }).click();
+    await this.page.getByRole('link', { name: /Log In/i }).click();
     await expect(this.loginTitle).toBeVisible();
   }
 
