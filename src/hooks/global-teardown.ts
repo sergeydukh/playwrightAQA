@@ -10,6 +10,7 @@ export default async function globalTeardown() {
     if (pidTxt) {
       const pid = Number(pidTxt);
       await new Promise<void>((resolve) => {
+        console.log(`Killing API server with PID: ${pid}`);
         treeKill(pid, 'SIGTERM', () => resolve());
       });
     }
