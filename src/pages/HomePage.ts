@@ -6,11 +6,11 @@ export class HomePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.openAccountBtn = page.getByRole('link', { name: /Open account/i });
+    this.openAccountBtn = page.locator('a.cards-main-baner__button:has-text("Open account")');
   }
 
   public async goto(): Promise<void> {
-    await this.page.goto('/');
+    await this.page.goto('https://paydo.com/');
     await this.openAccountBtn.waitFor({ state: 'visible' });
 }
 

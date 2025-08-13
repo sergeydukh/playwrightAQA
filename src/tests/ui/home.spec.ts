@@ -1,7 +1,11 @@
-import { test } from '../fixtures/ui';
+import { test } from '@playwright/test';
+import { HomePage } from '../../pages/HomePage';
+import { AccountPage } from '../../pages/AccountPage';
 
 test.describe('Account Page Tests', () => {
-  test('Open Account page and verify UI elements', async ({ home, account }) => {
+  test('Open Account page and verify UI elements', async ({ page }) => {
+    const home = new HomePage(page);
+    const account = new AccountPage(page);
 
     await test.step('Open https://paydo.com/ page', async () => {
       await home.goto();

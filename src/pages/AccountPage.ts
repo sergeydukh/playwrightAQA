@@ -35,7 +35,7 @@ export class AccountPage {
 
     // Navigation
     this.backToHomePage = page.getByRole('link', { name: /back to homepage/i });
-    this.loginButton = page.getByRole('link', { name: /Log In/i });
+    this.loginButton = page.locator('span:has-text("Log In")');
 
     // Headings and Labels
     this.createAccountTitle = page.getByRole('heading', { level: 1, name: /create a personal account/i });
@@ -44,21 +44,21 @@ export class AccountPage {
     this.confirmPasswordLabel = page.locator('text=Confirm password');
 
     // Input Fields
-    this.emailInput = page.getByPlaceholder('Enter email');
-    this.passwordInput = page.getByPlaceholder('Enter password').first();
-    this.confirmPasswordInput = page.getByPlaceholder('Enter password').last();
+    this.emailInput = page.locator('input[placeholder="Enter email"]');
+    this.passwordInput = page.locator('input[placeholder="Enter password"]').first();
+    this.confirmPasswordInput = page.locator('input[placeholder="Enter password"]').last();
 
     // Tooltips and Hints
     this.tooltipContainer = page.locator('ngp-tooltip.ngp-tooltip--primary');
     this.passwordRules = page.locator('.ngp-field-requirements');
 
     // Buttons
-    this.createAccountButton = page.getByRole('button', { name: /Create an account/i });
+    this.createAccountButton = page.locator('button:has-text("Create an account")');
     this.switchToCreateAccountButton = page.getByRole('link', { name: /switch to create business account/i });
 
     //  Legal Information
     this.termsOfUseText = page.locator('text=By creating an account you confirm that you read and accept our');
-    this.termsOfUseLink = page.getByRole('link', { name: /Terms of Use/i });
+    this.termsOfUseLink = page.locator('a:has-text("Terms of Use")');
   }
 
   

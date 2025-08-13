@@ -27,7 +27,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], baseURL: 'https://paydo.com' },
+      use: { ...devices['Desktop Chrome'] },
       testMatch: /.*\/ui\/.*\.spec\.ts$/,
     },
     {
