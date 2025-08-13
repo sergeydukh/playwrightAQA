@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
 
 test.describe('Login Page tests', () => {
-  test.beforeAll(async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     const login = new LoginPage(page);
     await login.openFromHome();
     await login.verifyUI();

@@ -49,7 +49,7 @@ export class AccountPage {
     this.confirmPasswordInput = page.locator('input[placeholder="Enter password"]').last();
 
     // Tooltips and Hints
-    this.tooltipContainer = page.locator('.cdk-overlay-container');
+    this.tooltipContainer = page.locator('ngp-tooltip.ngp-tooltip--primary');
     this.passwordRules = page.locator('.ngp-field-requirements');
 
     // Buttons
