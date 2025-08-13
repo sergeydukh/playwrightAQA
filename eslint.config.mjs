@@ -50,6 +50,6 @@ export default tsEslint.config({
         ],
         '@stylistic/arrow-spacing': 'error',
         '@stylistic/comma-spacing': ['error', { before: false, after: true }],
-        '@stylistic/keyword-spacing': ['error', { before: true, after: true }],
+        '@stylistic/keyword-spacing': ['error', { before: true, after: true }]
     }
 });
