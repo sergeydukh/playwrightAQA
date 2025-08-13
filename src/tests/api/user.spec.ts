@@ -2,14 +2,14 @@ import { test, expect } from '../fixtures/userClient';
 import { randomUsername, validAge } from '../../utils/data';
 
 test.describe('User API — basic contract', () => {
-    test('POST /user → 201 + {user_id, username}', async ({ apiClient }) => {
+    test('POST Create User ', async ({ apiClient }) => {
         const body = { username: randomUsername('sergey'), age: validAge(), user_type: true };
         const res = await apiClient.createUser(body);
         expect(res.username).toBe(body.username);
         expect(typeof res.user_id).toBe('number');
     });
 
-    test('GET /user → 200 + {username, age(1..100), user_id}', async ({ apiClient }) => {
+    test('GET Get User Info by user_id', async ({ apiClient }) => {
         const created = await apiClient.createUser({ username: randomUsername('temp'), age: 25, user_type: false });
         const got = await apiClient.getUser(created.user_id);
         expect(got.username).toBe(created.username);
@@ -35,7 +35,7 @@ test.describe('User API — negative cases', () => {
     }
 
     test('GET /user → 400 when user_id is missing', async ({ request }) => {
-        const res = await request.get('/user'); // без user_id
+        const res = await request.get('/user');
         expect(res.status(), await res.text()).toBe(400);
     });
 

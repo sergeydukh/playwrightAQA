@@ -1,21 +1,26 @@
-import { test } from '../fixtures/ui';
+import { test } from '@playwright/test';
+import { LoginPage } from '../../pages/LoginPage';
 
-test.describe('Open the "Log In" page, enter invalid data and check the error message', () => {
-    test('Open the "Log In" page', async ({ login }) => {
-        await login.openFromHome();
-        await login.verifyUI();
-    });
+test.describe('Log In flow — single run', () => {
+    test('Open, validate UI, invalid creds error, masked password, empty hints', async ({ page }) => {
+        const login = new LoginPage(page);
 
-    test('Invalid credentials show error', async ({ login }) => {
-        await login.login('wrong@mail.com', 'wrongPassword');
-        await login.verifyErrorMessage('The email address or password you entered is incorrect');
-    });
+        await test.step('Open the Log In page and verify UI', async () => {
+            await login.openFromHome();
+            await login.verifyUI();
+        });
 
-    test('Password field is masked', async ({ login }) => {
-        await login.expectPasswordMasked();
-    });
+        await test.step('Invalid credentials show error', async () => {
+            await login.login('wrong@mail.com', 'wrongPassword');
+            await login.verifyErrorMessage('The email address or password you entered is incorrect');
+        });
 
-    test('Empty credentials show hint', async ({ login }) => {
-        await login.hoverFields();
+        await test.step('Password field is masked', async () => {
+            await login.expectPasswordMasked();
+        });
+
+        await test.step('Empty credentials show field hints', async () => {
+            await login.hoverFields();
+        });
     });
 });

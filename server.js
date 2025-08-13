@@ -1,12 +1,11 @@
-// server.js
 import express from 'express';
 import cors from 'cors';
 
 const app = express();
-app.use(cors()); // разрешим CORS для простоты
-app.use(express.json()); // парсим JSON
+app.use(cors());
+app.use(express.json());
 
-let users = []; // In-memory "БД"
+let users = [];
 let nextId = 1;
 
 // POST /user  { username: string, age: number[1..100], user_type: boolean } -> { user_id, username }
@@ -26,7 +25,6 @@ app.post('/user', (req, res) => {
     const user = { user_id: nextId++, username: username.trim(), age, user_type };
     users.push(user);
 
-    // ТЗ просит вернуть user_id и username
     return res.status(201).json({ user_id: user.user_id, username: user.username });
 });
 
@@ -39,7 +37,6 @@ app.get('/user', (req, res) => {
     const user = users.find((u) => u.user_id === user_id);
     if (!user) return res.status(404).json({ error: 'user not found' });
 
-    // ТЗ просит вернуть username, age, user_id
     const { username, age } = user;
     return res.json({ username, age, user_id });
 });

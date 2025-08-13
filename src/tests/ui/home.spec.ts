@@ -2,7 +2,6 @@ import { test } from '../fixtures/ui';
 
 test.describe('Account Page Tests', () => {
     test('Open Account page and verify UI elements', async ({ home }) => {
-
         await test.step('Open https://paydo.com/ page', async () => {
             await home.goto();
         });

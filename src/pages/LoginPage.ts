@@ -43,9 +43,9 @@ export class LoginPage {
     }
 
     async hoverFields() {
-        await this.emailInput.click();
-        await this.passwordInput.click();
-        await this.page.locator('body').click();
+        await this.emailInput.clear();
+        await this.passwordInput.clear();
+        // await this.page.locator('body').click();
         await expect(this.hintEmail).toHaveText('Please fill in this field to continue');
         await expect(this.hintPassword).toHaveText('Please fill in this field to continue');
     }

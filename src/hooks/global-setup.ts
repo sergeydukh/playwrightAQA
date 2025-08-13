@@ -11,7 +11,6 @@ export default async function globalSetup(_config: FullConfig) {
         shell: true
     });
 
-    // Save PID в .playwright/server.pid
     const pidFile = join(process.cwd(), '.playwright', 'server.pid');
     mkdirSync(dirname(pidFile), { recursive: true });
     writeFileSync(pidFile, String(child.pid ?? ''), 'utf-8');
