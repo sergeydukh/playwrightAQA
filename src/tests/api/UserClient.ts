@@ -18,15 +18,19 @@ export type UserGetResponse = {
 };
 
 export class UserClient {
-    constructor(private request: APIRequestContext) {}
+    private readonly request: APIRequestContext;
 
-    async createUser(body: UserPostBody): Promise<UserPostResponse> {
+    constructor(request: APIRequestContext) {
+        this.request = request;
+    }
+
+    async createUser(body: Readonly<UserPostBody>): Promise<UserPostResponse> {
         const res = await this.request.post('/user', { data: body });
 
         expect(res.ok(), `POST /user failed: ${res.status()} ${await res.text()}`).toBeTruthy();
         expect(res.status()).toBe(201);
 
-        const json = (await res.json()) as UserPostResponse;
+        const json = (await res.json()) as unknown as UserPostResponse;
 
         expect(typeof json.user_id).toBe('number');
         expect(json.username).toBe(body.username);
@@ -38,7 +42,7 @@ export class UserClient {
         expect(res.ok(), `GET /user failed: ${res.status()} ${await res.text()}`).toBeTruthy();
         expect(res.status()).toBe(200);
 
-        const json = (await res.json()) as UserGetResponse;
+        const json = (await res.json()) as unknown as UserGetResponse;
 
         expect(json.user_id).toBe(user_id);
         expect(typeof json.username).toBe('string');

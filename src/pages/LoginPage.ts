@@ -1,4 +1,3 @@
-// pages/LoginPage.ts
 import { Page, Locator, expect } from '@playwright/test';
 
 export class LoginPage {
@@ -23,38 +22,37 @@ export class LoginPage {
         this.hintPassword = page.locator('.auth-password-field .mat-error');
     }
 
-    async openFromHome() {
+    async openFromHome(): Promise<void> {
         await this.page.goto('https://paydo.com/');
         await this.page.locator('a.cards-main-baner__button:has-text("Open account")').click();
         await this.page.locator('span:has-text("Log In")').click();
         await expect(this.loginTitle).toBeVisible();
     }
 
-    async verifyUI() {
+    async verifyUI(): Promise<void> {
         await expect(this.emailInput).toBeVisible();
         await expect(this.passwordInput).toBeVisible();
         await expect(this.loginButton).toBeVisible();
     }
 
-    async login(email: string, password: string) {
+    async login(email: string, password: string): Promise<void> {
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
 
-    async hoverFields() {
+    async hoverFields(): Promise<void> {
         await this.emailInput.clear();
         await this.passwordInput.clear();
-        // await this.page.locator('body').click();
         await expect(this.hintEmail).toHaveText('Please fill in this field to continue');
         await expect(this.hintPassword).toHaveText('Please fill in this field to continue');
     }
 
-    async verifyErrorMessage(expectedText: string) {
+    async verifyErrorMessage(expectedText: string): Promise<void> {
         await expect(this.errorMessage).toHaveText(expectedText);
     }
 
-    async expectPasswordMasked() {
+    async expectPasswordMasked(): Promise<void> {
         await expect(this.passwordInput).toHaveAttribute('type', 'password');
     }
 }

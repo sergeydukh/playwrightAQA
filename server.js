@@ -5,7 +5,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+/**
+ * @typedef {Object} User
+ * @property {number} user_id
+ * @property {string} username
+ * @property {number} age
+ * @property {boolean} user_type
+ */
+
+/** @type {User[]} */
 let users = [];
+/** @type {number} */
 let nextId = 1;
 
 // POST /user  { username: string, age: number[1..100], user_type: boolean } -> { user_id, username }
@@ -22,6 +32,7 @@ app.post('/user', (req, res) => {
         return res.status(400).json({ error: 'user_type must be boolean' });
     }
 
+    /** @type {User} */
     const user = { user_id: nextId++, username: username.trim(), age, user_type };
     users.push(user);
 

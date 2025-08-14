@@ -8,7 +8,8 @@ type Fixtures = {
 export const test = base.extend<Fixtures>({
     apiClient: async ({ baseURL }, use) => {
         const ctx = await request.newContext({ baseURL });
-        await use(new UserClient(ctx));
+        const client = new UserClient(ctx);
+        await use(client);
         await ctx.dispose();
     }
 });

@@ -72,27 +72,27 @@ export class HomePage {
         await this.openAccountBtn.waitFor({ state: 'visible' });
     }
 
-    async clickOpenAccount() {
+    async clickOpenAccount(): Promise<void> {
         await this.openAccountBtn.click();
     }
 
-    async fillEmail(email: string) {
+    async fillEmail(email: string): Promise<void> {
         await this.emailInput.fill(email);
     }
 
-    async fillPassword(password: string) {
+    async fillPassword(password: string): Promise<void> {
         await this.passwordInput.fill(password);
     }
 
-    async fillConfirmPassword(password: string) {
+    async fillConfirmPassword(password: string): Promise<void> {
         await this.confirmPasswordInput.fill(password);
     }
 
-    async clickCreateAccount() {
+    async clickCreateAccount(): Promise<void> {
         await this.createAccountButton.click();
     }
 
-    async verifyUIElements() {
+    async verifyUIElements(): Promise<void> {
         await expect(this.backToHomePage).toBeVisible();
         await expect(this.loginButton).toBeVisible();
         await expect(this.createAccountTitle).toBeVisible();

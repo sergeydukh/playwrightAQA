@@ -1,10 +1,8 @@
-import { test } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
+import { test } from '../fixtures/ui';
 
 test.describe('Log In flow — single run', () => {
-    test('Open, validate UI, invalid creds error, masked password, empty hints', async ({ page }) => {
-        const login = new LoginPage(page);
-
+    test('Open, validate UI, invalid creds error, masked password, empty hints', async ({ login }) => {
+        
         await test.step('Open the Log In page and verify UI', async () => {
             await login.openFromHome();
             await login.verifyUI();
